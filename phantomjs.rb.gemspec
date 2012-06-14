@@ -17,17 +17,14 @@ Gem::Specification.new do |s|
   s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
   s.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
   s.require_paths = ["lib"]
+  s.platform = Gem::Platform::CURRENT
 
   # specify any dependencies here; for example:
   s.add_development_dependency "ZenTest"
   s.add_development_dependency "rspec"
   s.add_development_dependency "rake"
 
-  if RUBY_PLATFORM == "x86_64-linux"
-    s.add_runtime_dependency 'phantomjs-linux64'
-  elsif RUBY_PLATFORM =~ /linux/
-    s.add_runtime_dependency 'phantomjs-linux'
-  elsif RUBY_PLATFORM =~ /darwin/
-    s.add_runtime_dependency 'phantomjs-mac'
-  end
+  s.add_runtime_dependency 'phantomjs-linux64' if s.platform.to_s =="x86_64-linux"
+  s.add_runtime_dependency 'phantomjs-linux' if s.platform.to_s == "linux"
+  s.add_runtime_dependency 'phantomjs-mac' if s.platform.to_s.match(/darwin/)
 end
