@@ -23,7 +23,9 @@ Gem::Specification.new do |s|
   s.add_development_dependency "rspec"
   s.add_development_dependency "rake"
 
-  if RUBY_PLATFORM =~ /linux/
+  if RUBY_PLATFORM == "x86_64-linux"
+    s.add_runtime_dependency 'phantomjs-linux64'
+  elsif RUBY_PLATFORM =~ /linux/
     s.add_runtime_dependency 'phantomjs-linux'
   elsif RUBY_PLATFORM =~ /darwin/
     s.add_runtime_dependency 'phantomjs-mac'
